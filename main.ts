@@ -12,22 +12,14 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
     sprite.setPosition(sprite.x + 16, sprite.y)
 })
 sprites.onOverlap(SpriteKind.blood, SpriteKind.blood, function (sprite, otherSprite) {
-    tiles.placeOnRandomTile(BloodPackets, assets.tile`myTile28`)
-})
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (incave && jumping) {
-        jumping = false
-        Hammy.vy = -600
-    } else if (!(incave)) {
-        Hammy.vy = -100
-    }
+    tiles.placeOnRandomTile(otherSprite, assets.tile`myTile28`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
+    makeWeed()
     underwater = true
     tiles.setCurrentTilemap(tilemap`level9`)
     Portal = sprites.create(assets.image`myImage0`, SpriteKind.portal)
     tiles.placeOnRandomTile(Portal, assets.tile`myTile29`)
-    makeWeed()
     sprite.setPosition(7, 11)
     effects.bubbles.startScreenEffect()
     sprites.destroyAllSpritesOfKind(SpriteKind.org)
@@ -54,22 +46,20 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.org, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
     remorg += -1
     sprites.destroy(otherSprite)
 })
-controller.down.onEvent(ControllerButtonEvent.Released, function () {
-    if (!(incave)) {
-        Hammy.vy = 0
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (Hammy.isHittingTile(CollisionDirection.Bottom) || jumping) {
+        Hammy.vy = -150
     }
 })
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    Hammy.vx = -100
-})
-controller.right.onEvent(ControllerButtonEvent.Released, function () {
-    Hammy.vx = 0
-})
-controller.left.onEvent(ControllerButtonEvent.Released, function () {
-    Hammy.vx = 0
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
+    if (invul) {
+        info.changeLifeBy(-1)
+        invul = false
+    }
 })
 function spawnOrg () {
     orglist = [
@@ -190,7 +180,6 @@ function spawnOrg () {
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite, otherSprite) {
-    incave = true
     underwater = false
     sprites.destroyAllSpritesOfKind(SpriteKind.background)
     effects.bubbles.endScreenEffect()
@@ -198,7 +187,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite, otherS
     sprites.destroyAllSpritesOfKind(SpriteKind.blood)
     tiles.setCurrentTilemap(tilemap`level4`)
     tiles.placeOnRandomTile(sprite, assets.tile`myTile9`)
-    Hammy.vy = 300
+    controller.moveSprite(sprite, 100, 0)
+    Hammy.ay = 300
 })
 sprites.onOverlap(SpriteKind.Food, SpriteKind.Food, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(otherSprite, sprites.castle.tilePath5)
@@ -333,11 +323,14 @@ function sharkStorm () {
     Shark.setPosition(Shark.x, randint(0, 120))
     Shark.setFlag(SpriteFlag.AutoDestroy, true)
 }
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    Hammy.vx = 100
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
+    if (invul) {
+        info.changeLifeBy(-1)
+        invul = false
+    }
 })
 function makeWeed () {
     weedtype = [img`
@@ -489,7 +482,7 @@ function makeWeed () {
         ........87688...
         `]
     weedcount = 0
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 50; index++) {
         weed = sprites.create(weedtype[randint(0, 2)], SpriteKind.background)
         weed.changeScale(randint(0.5, 1), ScaleAnchor.Middle)
         weed.setPosition(weedcount * 20, 95)
@@ -497,17 +490,6 @@ function makeWeed () {
         weedcount += 1
     }
 }
-controller.up.onEvent(ControllerButtonEvent.Released, function () {
-    if (!(incave)) {
-        Hammy.vy = -100
-    }
-    Hammy.vy = 0
-})
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(incave)) {
-        Hammy.vy = 100
-    }
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile5`, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`level1`)
     reorg = 5
@@ -558,37 +540,41 @@ let Shark: Sprite = null
 let orgs: Sprite = null
 let orgcount = 0
 let orglist: Image[] = []
+let jumping = false
 let remorg = 0
 let BloodPackets: Sprite = null
 let Portal: Sprite = null
-let jumping = false
+let invul = false
 let underwater = false
 let remainingSkinPellets = 0
 let reorg = 0
-let incave = false
 let Hammy: Sprite = null
 tiles.setCurrentTilemap(tilemap`level1`)
 Hammy = sprites.create(assets.image`myImage1`, SpriteKind.Player)
 tiles.placeOnRandomTile(Hammy, sprites.castle.tilePath5)
-incave = false
 reorg = 6
 remainingSkinPellets = 6
 underwater = false
-jumping = true
+invul = false
+info.setLife(3)
+controller.moveSprite(Hammy)
 scene.cameraFollowSprite(Hammy)
 spawnSkinPellets()
-Portal = sprites.create(assets.image`myImage0`, SpriteKind.portal)
+game.onUpdate(function () {
+	
+})
+game.onUpdate(function () {
+    if (Hammy.isHittingTile(CollisionDirection.Bottom)) {
+        jumping = false
+    }
+})
 game.onUpdateInterval(5000, function () {
     if (underwater) {
         sharkStorm()
     }
 })
-game.onUpdateInterval(50, function () {
-    if (incave && Hammy.isHittingTile(CollisionDirection.Bottom)) {
-        jumping = true
-    } else if (incave && Hammy.vy > 100) {
-        Hammy.vy = Hammy.vy + 5
-    } else if (incave) {
-        Hammy.vy = 100
+game.onUpdateInterval(1000, function () {
+    if (!(invul)) {
+        invul = true
     }
 })
