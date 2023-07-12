@@ -4,6 +4,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "myImage"
     },
+    "image2": {
+        "data": "hwQgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////DwAAAAAAAAAAAP+qqqqqursLAAAAAAAAAPCqqv//qqqqugsAAAAAAACvqr+rqv//qqq7AAAAAADwqru7+/+vqv+vzAwAAAAAr7rLzP+q+v+v/6rMAAAA8Pq7zP+qqqqq//+vyg8AAPD6y/yq////r6r6+soMAACvr8uv+ru7u/+qqv+qDwAAr6/7qr+rqqr6r6r/qg8AAK+v+vqrqqqqqq+qr6oPAACvr/r6qv//r6qv+q/6DwAAr6/6+qr/r6/6/8+s+g8AAK+v+vqq/6uq+v/MqvoPAAD/qvr6qv+7u8/PrKr/DwAA/6r6+qqv///PzKr6rw8AAK+v+vqv////zKqq/6oPAACvr/qq/6qqqqr//6qqDwAAr//Kr7v/////qquqqg8AAPD7z6y7u7u7u7uqqsoAAADwu6/Mqqqqu6uqqqrKAAAAAK+ryvyqqqqqqqqqzAAAAADwu6rM/P//qqqqzAwAAAAAAK+rqqqqqv//vwwAAAAAAADwuqv6qqqqursAAAAAAAAAAP+6u///ursPAAAAAAAAAAAA//////8PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage0"
+    },
+    "image3": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAA8PUAAAAAAABfVQ8AAAAA8FVV9QAAAAAAX1UPAAAAAADw9QAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage1"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
