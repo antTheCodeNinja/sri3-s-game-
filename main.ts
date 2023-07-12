@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const background = SpriteKind.create()
     export const blood = SpriteKind.create()
     export const portal = SpriteKind.create()
+    export const bones = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`level0`)
@@ -60,6 +61,9 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sp
         info.changeLifeBy(-1)
         invul = false
     }
+})
+sprites.onOverlap(SpriteKind.bones, SpriteKind.bones, function (sprite, otherSprite) {
+    tiles.placeOnRandomTile(otherSprite, assets.tile`myTile10`)
 })
 function spawnOrg () {
     orglist = [
@@ -189,6 +193,27 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite, otherS
     tiles.placeOnRandomTile(sprite, assets.tile`myTile9`)
     controller.moveSprite(sprite, 100, 0)
     Hammy.ay = 300
+    for (let index = 0; index < 32; index++) {
+        bones = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . 2 2 2 2 . . . 
+            . . . . . . . 2 2 1 1 1 1 2 . . 
+            . . . . 2 2 3 3 1 1 1 1 1 1 . . 
+            . . 3 3 3 3 1 1 1 1 1 1 1 1 . . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . . 3 3 2 2 3 1 1 1 1 1 1 1 . . 
+            . . . . . . 2 2 3 1 1 1 1 2 . . 
+            . . . . . . . . . 2 2 2 2 . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.bones)
+        tiles.placeOnRandomTile(bones, assets.tile`myTile10`)
+    }
 })
 sprites.onOverlap(SpriteKind.Food, SpriteKind.Food, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(otherSprite, sprites.castle.tilePath5)
@@ -528,6 +553,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     remainingSkinPellets += -1
     sprites.destroy(otherSprite)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.bones, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    sprites.destroy(otherSprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.blood, function (sprite, otherSprite) {
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
@@ -537,6 +566,7 @@ let weed: Sprite = null
 let weedcount = 0
 let weedtype: Image[] = []
 let Shark: Sprite = null
+let bones: Sprite = null
 let orgs: Sprite = null
 let orgcount = 0
 let orglist: Image[] = []
