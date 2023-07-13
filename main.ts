@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const blood = SpriteKind.create()
     export const portal = SpriteKind.create()
     export const bones = SpriteKind.create()
+    export const playerHit = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`level0`)
@@ -51,6 +52,40 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.org, function (sprite, otherSpri
     remorg += -1
     sprites.destroy(otherSprite)
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    boom = sprites.create(img`
+        .........................
+        .3333..........333.......
+        .333...........333.......
+        ..33.........3333........
+        ..33........333..........
+        ..33..3....33.....4......
+        .333..33.........44......
+        .33...3d3..44..44d4......
+        .33....35345544dd44....33
+        .......3d5d11d55d44...333
+        .......455111151154...33.
+        ......45555115111d44..33.
+        ......4d511555111554..33.
+        ......4451155555d554..33.
+        ..33...43d555d55ddd4..33.
+        .333..455d555ddd554.3333.
+        .3333.455d35dd3d554.33...
+        .33...44dd4ddd43dd4......
+        .33....45444444444.......
+        .33...454..444...44......
+        333...44..........44.....
+        333......................
+        .............3333..333333
+        ...............33333333..
+        .........................
+        `, SpriteKind.playerHit)
+    boom.changeScale(1, ScaleAnchor.Middle)
+    boom.setPosition(Hammy.x, Hammy.y)
+    music.play(music.melodyPlayable(music.bigCrash), music.PlaybackMode.UntilDone)
+    pause(100)
+    sprites.destroy(boom)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Hammy.isHittingTile(CollisionDirection.Bottom) || jumping) {
         Hammy.vy = -150
@@ -64,6 +99,34 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sp
 })
 sprites.onOverlap(SpriteKind.bones, SpriteKind.bones, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(otherSprite, assets.tile`myTile10`)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level5`)
+    sprites.destroyAllSpritesOfKind(SpriteKind.bones)
+    controller.moveSprite(sprite)
+    tiles.placeOnRandomTile(Hammy, assets.tile`myTile17`)
+    Hammy.ay = 0
+    controller.moveSprite(sprite, 100, 100)
+    Satan = sprites.create(img`
+        . d b d f f f f f f f f d b d . 
+        . . d b f 2 2 2 2 2 2 f b d . . 
+        . . . d f 2 f 2 2 f 2 f d . . . 
+        . . . f 2 2 2 f 2 2 f 2 f . . . 
+        . . f 2 2 5 1 2 5 1 2 2 2 f . . 
+        . f 2 2 2 5 1 2 5 1 2 2 2 2 f . 
+        f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+        f f 2 2 2 2 f f f 2 2 2 2 2 f f 
+        f f f 2 2 f 2 2 2 f 2 2 2 f f f 
+        f 2 f f 2 2 2 2 2 2 2 2 f f 2 f 
+        f 2 f f 2 2 2 2 2 2 2 2 f f 2 f 
+        f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+        f 2 f f f 2 f f f f 2 b f f 2 f 
+        . f d d d f . . . . f d d d f . 
+        . . f b f . . . . . . f b f . . 
+        . . . f . . . . . . . . f . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(Satan, assets.tile`myTile15`)
+    Satan.follow(Hammy, 40)
 })
 function spawnOrg () {
     orglist = [
@@ -561,6 +624,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.blood, function (sprite, otherSp
     info.changeScoreBy(1)
     sprites.destroy(otherSprite)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    if (invul) {
+        info.changeLifeBy(-1)
+        invul = false
+    }
+})
 let Skin_Pellets: Sprite = null
 let weed: Sprite = null
 let weedcount = 0
@@ -570,7 +639,9 @@ let bones: Sprite = null
 let orgs: Sprite = null
 let orgcount = 0
 let orglist: Image[] = []
+let Satan: Sprite = null
 let jumping = false
+let boom: Sprite = null
 let remorg = 0
 let BloodPackets: Sprite = null
 let Portal: Sprite = null
@@ -586,13 +657,10 @@ reorg = 6
 remainingSkinPellets = 6
 underwater = false
 invul = false
-info.setLife(3)
+info.setLife(666)
 controller.moveSprite(Hammy)
 scene.cameraFollowSprite(Hammy)
 spawnSkinPellets()
-game.onUpdate(function () {
-	
-})
 game.onUpdate(function () {
     if (Hammy.isHittingTile(CollisionDirection.Bottom)) {
         jumping = false
