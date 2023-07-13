@@ -657,7 +657,7 @@ reorg = 6
 remainingSkinPellets = 6
 underwater = false
 invul = false
-info.setLife(666)
+info.setLife(3)
 controller.moveSprite(Hammy)
 scene.cameraFollowSprite(Hammy)
 spawnSkinPellets()
