@@ -27,21 +27,21 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
     sprites.destroyAllSpritesOfKind(SpriteKind.org)
     for (let index = 0; index < 6; index++) {
         BloodPackets = sprites.create(img`
-            . . . . . . . . . . . 6 6 6 6 6 
-            . . . . . . . . . 6 6 7 7 7 7 8 
-            . . . . . . 8 8 8 7 7 8 8 6 8 8 
-            . . e e e e c 6 6 8 8 . 8 7 8 . 
-            . e 2 5 4 2 e c 8 . . . 6 7 8 . 
-            e 2 4 2 2 2 2 2 c . . . 6 7 8 . 
-            e 2 2 2 2 2 2 2 c . . . 8 6 8 . 
-            e 2 e e 2 2 2 2 e e e e c 6 8 . 
-            c 2 e e 2 2 2 2 e 2 5 4 2 c 8 . 
-            . c 2 e e e 2 e 2 4 2 2 2 2 c . 
-            . . c 2 2 2 e e 2 2 2 2 2 2 2 e 
-            . . . e c c e c 2 2 2 2 2 2 2 e 
-            . . . . . . . c 2 e e 2 2 e 2 c 
-            . . . . . . . c e e e e e e 2 c 
-            . . . . . . . . c e 2 2 2 2 c . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . b b b b c . . . . . . . . . 
+            . b f f f 1 b c . . . . . . . . 
+            b 1 f f 1 1 2 1 c . . . . . . . 
+            b 1 1 1 1 1 1 2 c . . . . . . . 
+            b 1 b b 1 1 1 1 b b b b c . . . 
+            c 1 b b 1 1 2 2 b 1 f f 1 c . . 
+            . c 1 2 b b 1 b 1 f f f 1 1 c . 
+            . . c 1 2 1 b b 1 f f 1 1 1 1 b 
+            . . . b c c b c 1 1 1 1 1 2 1 b 
+            . . . . . . . c 1 b b b 1 b 2 c 
+            . . . . . . . c 2 b b 2 b b b c 
+            . . . . . . . . c 2 b b 2 b c . 
             . . . . . . . . . c c c c c . . 
             `, SpriteKind.blood)
         tiles.placeOnRandomTile(BloodPackets, assets.tile`myTile28`)
@@ -55,30 +55,30 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.org, function (sprite, otherSpri
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     boom = sprites.create(img`
         .........................
-        .3333..........333.......
-        .333...........333.......
-        ..33.........3333........
-        ..33........333..........
-        ..33..3....33.....4......
-        .333..33.........44......
-        .33...3d3..44..44d4......
-        .33....35345544dd44....33
-        .......3d5d11d55d44...333
-        .......455111151154...33.
-        ......45555115111d44..33.
-        ......4d511555111554..33.
-        ......4451155555d554..33.
-        ..33...43d555d55ddd4..33.
-        .333..455d555ddd554.3333.
-        .3333.455d35dd3d554.33...
-        .33...44dd4ddd43dd4......
-        .33....45444444444.......
-        .33...454..444...44......
-        333...44..........44.....
-        333......................
-        .............3333..333333
-        ...............33333333..
-        .........................
+        .2332..........222.......
+        .2332..........233.......
+        ..232........22332.......
+        ..232......223322........
+        ..232.3....3322...4......
+        .2332.33...22....44......
+        .232..3d3..44..44d4......
+        .232...35345544dd44....23
+        .......3d5d11d55d44...233
+        .......455111151154...232
+        ......45555115111d44..232
+        ......4d511555111554..232
+        ......4451155555d554..232
+        ..232..43d555d55ddd4..232
+        .2232.455d555ddd554.22332
+        .2332.455d35dd3d554.3322.
+        .2322.44dd4ddd43dd4.222..
+        .232...45444444444.......
+        .232..454..444...44......
+        2332..44..........44.....
+        322..........2222..222222
+        22...........333322333333
+        .............223333333322
+        ...............22222222..
         `, SpriteKind.playerHit)
     boom.changeScale(1, ScaleAnchor.Middle)
     boom.setPosition(Hammy.x, Hammy.y)
@@ -108,22 +108,22 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     Hammy.ay = 0
     controller.moveSprite(sprite, 100, 100)
     Satan = sprites.create(img`
-        . d b d f f f f f f f f d b d . 
-        . . d b f 2 2 2 2 2 2 f b d . . 
-        . . . d f 2 f 2 2 f 2 f d . . . 
-        . . . f 2 2 2 f 2 2 f 2 f . . . 
-        . . f 2 2 5 1 2 5 1 2 2 2 f . . 
-        . f 2 2 2 5 1 2 5 1 2 2 2 2 f . 
-        f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
-        f f 2 2 2 2 f f f 2 2 2 2 2 f f 
-        f f f 2 2 f 2 2 2 f 2 2 2 f f f 
-        f 2 f f 2 2 2 2 2 2 2 2 f f 2 f 
-        f 2 f f 2 2 2 2 2 2 2 2 f f 2 f 
-        f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
-        f 2 f f f 2 f f f f 2 b f f 2 f 
-        . f d d d f . . . . f d d d f . 
-        . . f b f . . . . . . f b f . . 
-        . . . f . . . . . . . . f . . . 
+        . . . f . . . . . . . f . . . . 
+        . . f b f . . . . . f b f . . . 
+        . . f d f f f f f f f d f . . . 
+        . . . f e 2 2 2 2 2 2 f . . . . 
+        . . . f f f 2 2 2 f f f . . . . 
+        . . . f 1 5 f 2 f 5 1 f . . . . 
+        . . . f e 2 f e 2 f 2 f . . . . 
+        . . . f e 2 2 f f 2 2 f . 2 . 2 
+        . f . f e f 2 2 2 2 2 f . 2 . 2 
+        . f . f e e f f f f 2 f . 2 2 2 
+        f . . . f f f f f f f . . . 2 . 
+        . f . . f e 2 2 2 2 f f f f f . 
+        . . f f f e 2 2 2 2 f . . . 2 . 
+        . . . f e e e 2 2 2 2 f . . e . 
+        . . . f e f f f f f 2 f . . e . 
+        . . f f f f . . . f f f f . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnRandomTile(Satan, assets.tile`myTile15`)
     Satan.follow(Hammy, 40)
@@ -149,22 +149,22 @@ function spawnOrg () {
         . . . . . . . . . . . . . . . . 
         `,
     img`
-        . . . . . . b b b b . . . . . . 
-        . . . . . . b 4 4 4 b . . . . . 
-        . . . . . . b b 4 4 4 b . . . . 
-        . . . . . b 4 b b b 4 4 b . . . 
-        . . . . b d 5 5 5 4 b 4 4 b . . 
-        . . . . b 3 2 3 5 5 4 e 4 4 b . 
-        . . . b d 2 2 2 5 7 5 4 e 4 4 e 
-        . . . b 5 3 2 3 5 5 5 5 e e e e 
-        . . b d 7 5 5 5 3 2 3 5 5 e e e 
-        . . b 5 5 5 5 5 2 2 2 5 5 d e e 
-        . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
-        . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
-        b d 3 2 d 5 5 5 d d d 4 4 . . . 
-        b 5 5 5 5 d d 4 4 4 4 . . . . . 
-        4 d d d 4 4 4 . . . . . . . . . 
-        4 4 4 4 . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f . . . . . 
+        . . . . . f 2 2 2 f e f . . . . 
+        . . . . f 2 2 2 2 f e 2 f . . . 
+        . . . f 2 2 2 2 2 f e 2 f . . . 
+        . . f 2 2 2 2 2 e f e e 2 f . . 
+        . . f 2 2 2 2 e f f f f f f . . 
+        . . f 2 2 2 e e f . . . . . . . 
+        . . f 2 e e f f . . . . . . . . 
+        . . f f f f f . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `,
     img`
         . . . . . . b b b b a a . . . . 
