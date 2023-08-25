@@ -168,7 +168,28 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     tiles.placeOnRandomTile(Hammy, assets.tile`myTile17`)
     Hammy.ay = 0
     controller.moveSprite(sprite, 100, 100)
-  })
+    Satan = sprites.create(img`
+        . . . f . . . . . . . f . . . . 
+        . . f b f . . . . . f b f . . . 
+        . . f d f f f f f f f d f . . . 
+        . . . f e 2 2 2 2 2 2 f . . . . 
+        . . . f f f 2 2 2 f f f . . . . 
+        . . . f 1 5 f 2 f 5 1 f . . . . 
+        . . . f e 2 f e 2 f 2 f . . . . 
+        . . . f e 2 2 f f 2 2 f . 2 . 2 
+        . f . f e f 2 2 2 2 2 f . 2 . 2 
+        . f . f e e f f f f 2 f . 2 2 2 
+        f . . . f f f f f f f . . . 2 . 
+        . f . . f e 2 2 2 2 f f f f f . 
+        . . f f f e 2 2 2 2 f . . . 2 . 
+        . . . f e e e 2 2 2 2 f . . e . 
+        . . . f e f f f f f 2 f . . e . 
+        . . f f f f . . . f f f f . . . 
+        `, SpriteKind.Enemy)
+    SatanCutScene.sayText(Boss_Hp)
+    tiles.placeOnRandomTile(SatanCutScene, assets.tile`myTile15`)
+    SatanCutScene.follow(Hammy, 10)
+})
 function spawnOrg () {
     orglist = [
     img`
