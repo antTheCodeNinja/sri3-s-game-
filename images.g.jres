@@ -14,6 +14,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "myImage1"
     },
+    "image4": {
+        "data": "hwQQABAAAAAAAAAAAA8AAAAAAAD/8AAA8A8AAAAAD/C//f///wD///DvH+7u/+/+AC9fIu/v7v8AL/Iv8i/iDwAvIv7yLyIPAC/y8vIvIg8AL18v8i8i//AvHyIi/y/yv/3////w8P/wDwAAAPAA8AAAACAi8AAAAAAAACDy4g4AAAAgIgAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Satan"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

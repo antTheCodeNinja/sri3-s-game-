@@ -76,6 +76,25 @@ e 3 d 3 3 1 d d 3 d 1 b b e e .
 . . e 3 3 3 3 3 3 b e e e e . . 
 . . . e e e e e e e e e e . . . 
 `;
+            case "image4":
+            case "Satan":return img`
+. . . f . . . . . . . f . . . . 
+. . f b f . . . . . f b f . . . 
+. . f d f f f f f f f d f . . . 
+. . . f e 2 2 2 2 2 2 f . . . . 
+. . . f f f 2 2 2 f f f . . . . 
+. . . f 1 5 f 2 f 5 1 f . . . . 
+. . . f e 2 f e 2 f 2 f . . . . 
+. . . f e 2 2 f f 2 2 f . 2 . 2 
+. f . f e f 2 2 2 2 2 f . 2 . 2 
+. f . f e e f f f f 2 f . 2 2 2 
+f . . . f f f f f f f . . . 2 . 
+. f . . f e 2 2 2 2 f f f f f . 
+. . f f f e 2 2 2 2 f . . . 2 . 
+. . . f e e e 2 2 2 2 f . . e . 
+. . . f e f f f f f 2 f . . e . 
+. . f f f f . . . f f f f . . . 
+`;
         }
         return null;
     })

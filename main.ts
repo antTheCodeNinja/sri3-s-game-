@@ -1293,6 +1293,7 @@ let Farmist: Sprite = null
 let ChaseScene = false
 let Shark: Sprite = null
 let bones: Sprite = null
+let Satan: Sprite = null
 let orgs: Sprite = null
 let orgcount = 0
 let orglist: Image[] = []
